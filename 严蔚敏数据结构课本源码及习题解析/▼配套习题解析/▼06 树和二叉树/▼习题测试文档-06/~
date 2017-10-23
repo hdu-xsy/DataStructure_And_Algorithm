@@ -1,0 +1,13 @@
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+	int i = 2147483647;
+	
+	printf("%d\n", i);
+	
+	printf("%d\n", 8*sizeof(int));
+
+	return 0;
+}
+
