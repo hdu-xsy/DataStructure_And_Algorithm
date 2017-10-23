@@ -14,7 +14,7 @@ LinkList ListInitialize(LinkList &L)
 	L->next=NULL;
 	return L;
 }
-void ListInsert(LinkList &L,int i,int e)
+int ListInsert(LinkList &L,int i,int e)
 {
 	LinkList p=L;
 	int j=0;
@@ -24,11 +24,12 @@ void ListInsert(LinkList &L,int i,int e)
 		++j;
 	}
 	if(!p||j>i-1)
-		printf("ERROR");
+		return 0;
 	LinkList s=(LinkList)malloc(sizeof(LNode));
 	s->data = e;
 	s->next = p->next;
 	p->next = s;
+	return 1;
 }
 void OutputList(LinkList L)
 {
@@ -39,4 +40,21 @@ void OutputList(LinkList L)
 		L2=L2->next;
 	}
 	printf("\n");
+}
+
+int ListDelete_L(LinkList &L,int i,int e)
+{
+	LinkList p=L;int j = 0;
+	while(p->next && j<i-1)
+	{
+		p=p>next;
+		++j;
+	}
+	if(!(p->next||j>i-1))
+	return 0;
+	LinkList q=p->next;
+	p->next=q->next;
+	e=q->data;
+	free(q);
+	return 1;
 }
