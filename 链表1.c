@@ -46,23 +46,10 @@ void main()
 	LinkList ListInitialize(LinkList &L);
 	void OutputList(LinkList L);
 	int n,i,e;
-	re:printf("1.��ʼ��������2.����Ԫ��3.����\n");
-	scanf("%d",&n);
-	switch(n)
-	{
-	case 1:
 		LinkList L;
 		ListInitialize(L);
-		goto re;
-	case 2:
-		printf("�ڵ�iλ�ò���Ԫ��e\n");
 		scanf("%d",&i);
 		scanf("%d",&e);
 		ListInsert(L,i,e);
-		goto re;
-	case 3:
 		OutputList(L);
-		goto re;
-	}
-	system("pause");
 }
