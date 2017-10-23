@@ -31,23 +31,9 @@ void main()
 	void Push(SqStack &S,int e);
 	void Pop(SqStack &S,int &e);
 	int n,e;
-	re:printf("1.��ʼ��ջ2.��ջ3.��ջ\n");
-	scanf("%d\n",&n);
-	switch(n)
-	{
-	case 1:
 		SqStack S;
 		InitStack(S);
-		goto re;
-	case 2:
-		printf("����Ԫ��e\n");
 		scanf("%d",&e);
 		Push(S,e);
-		goto re;
-	case 3:
 		Pop(S,e);
-		goto re;
-	}
-
-	system("pause");
 }
