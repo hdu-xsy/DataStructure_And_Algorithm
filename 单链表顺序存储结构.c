@@ -1,33 +1,22 @@
-#define SEQUENCELIST_H
+
 
 #include <stdio.h>
 #include <stdlib.h>
-#define STATUS_H
 
 /* ×´Ì¬Âë */
 #define	TRUE		1			//Õæ
 #define	FALSE		0			//¼Ù
-#define YES			1			//ÊÇ
-#define NO          0			//·ñ
 #define	OK			1			//Í¨¹ı
 #define	ERROR		0			//´íÎó
-#define SUCCESS		1			//³É¹¦
-#define UNSUCCESS	0			//Ê§°Ü
-#define	INFEASIBLE	-1			//²»¿ÉĞĞ
 
 
 #define	OVERFLOW	-2			//¶ÑÕ»ÉÏÒç
-#define UNDERFLOW	-3			//¶ÑÕ»ÏÂÒç
-
-#define NULL ((void*)0)
 
 typedef int Status;
 
 #define LIST_INIT_SIZE 100				//Ë³Ğò±í´æ´¢¿Õ¼äµÄ³õÊ¼·ÖÅäÁ¿
 #define LISTINCREMENT  10				//Ë³Ğò±í´æ´¢¿Õ¼äµÄ·ÖÅäÔöÁ¿
 
-
-#define LELEMTYPE_SQ
 typedef int LElemType_Sq;
 
 
@@ -38,17 +27,17 @@ typedef struct
 	int listsize;						//µ±Ç°·ÖÅäµÄ´æ´¢ÈİÁ¿
 }SqList;								//Ë³Ğò±í0ºÅµ¥ÔªÕı³£Ê¹ÓÃ
 
-/* Ë³Ğò±íº¯ÊıÁĞ±í */
+										/* Ë³Ğò±íº¯ÊıÁĞ±í */
 Status InitList_Sq(SqList *L)//³õÊ¼»¯¿ÕË³Ğò±íL
 {
-(*L).elem = (LElemType_Sq*)malloc(LIST_INIT_SIZE*sizeof(LElemType_Sq));
-if(!(*L).elem)
-  exit(OVERFLOW); 				//·ÖÅäÄÚ´æÊ§°Ü
+	(*L).elem = (LElemType_Sq*)malloc(LIST_INIT_SIZE * sizeof(LElemType_Sq));
+	if (!(*L).elem)
+		exit(OVERFLOW); 				//·ÖÅäÄÚ´æÊ§°Ü
 
-(*L).length = 0;					//³õÊ¼»¯Ë³Ğò±í³¤¶ÈÎª0
-(*L).listsize = LIST_INIT_SIZE;		//Ë³Ğò±í³õÊ¼ÄÚ´æ·ÖÅäÁ¿
+	(*L).length = 0;					//³õÊ¼»¯Ë³Ğò±í³¤¶ÈÎª0
+	(*L).listsize = LIST_INIT_SIZE;		//Ë³Ğò±í³õÊ¼ÄÚ´æ·ÖÅäÁ¿
 
-return OK;							//³õÊ¼»¯³É¹¦
+	return OK;							//³õÊ¼»¯³É¹¦
 }
 
 void ClearList_Sq(SqList *L)//Çå¿ÕË³Ğò±íL
@@ -67,7 +56,7 @@ void DestroyList_Sq(SqList *L)//Ïú»ÙË³Ğò±íL
 
 Status ListEmpty_Sq(SqList L)//ÅĞ¶ÏË³Ğò±íLÊÇ·ñÎª¿Õ
 {
-	return 	L.length==0 ? TRUE : FALSE;
+	return 	L.length == 0 ? TRUE : FALSE;
 }
 
 int ListLength_Sq(SqList L)//·µ»ØË³Ğò±íLÖĞÔªËØ¸öÊı
@@ -77,10 +66,10 @@ int ListLength_Sq(SqList L)//·µ»ØË³Ğò±íLÖĞÔªËØ¸öÊı
 
 Status GetElem_Sq(SqList L, int i, LElemType_Sq *e)//ÓÃe½ÓÊÕË³Ğò±íLÖĞµÚi¸öÔªËØ
 {
-	if(i<1 || i>L.length)
+	if (i<1 || i>L.length)
 		return ERROR;					//iÖµ²»ºÏ·¨
 	else
-		*e = L.elem[i-1];
+		*e = L.elem[i - 1];
 
 	return OK;
 }
@@ -90,10 +79,10 @@ int LocateElem_Sq(SqList L, LElemType_Sq e, Status(Compare)(LElemType_Sq, LElemT
 {
 	int i = 1;							//iµÄ³õÖµÎªµÚÒ»¸öÔªËØµÄÎ»Ğò
 
-	while(i<=L.length && !Compare(e, L.elem[i-1]))
+	while (i <= L.length && !Compare(e, L.elem[i - 1]))
 		++i;
 
-	if(i<=L.length)
+	if (i <= L.length)
 		return i;
 	else
 		return 0;
@@ -103,14 +92,14 @@ Status PriorElem_Sq(SqList L, LElemType_Sq cur_e, LElemType_Sq *pre_e)//ÓÃpre_e½
 {
 	int i = 1;
 
-	if(L.elem[0]!=cur_e)				//µÚÒ»¸ö½áµãÎŞÇ°Çı
+	if (L.elem[0] != cur_e)				//µÚÒ»¸ö½áµãÎŞÇ°Çı
 	{
-		while(i<L.length && L.elem[i]!=cur_e)
+		while (i<L.length && L.elem[i] != cur_e)
 			++i;
 
-		if(i<L.length)
+		if (i<L.length)
 		{
-			*pre_e = L.elem[i-1];
+			*pre_e = L.elem[i - 1];
 			return OK;
 		}
 	}
@@ -122,12 +111,12 @@ Status NextElem_Sq(SqList L, LElemType_Sq cur_e, LElemType_Sq *next_e)//ÓÃnext_e
 {
 	int i = 0;
 
-	while(i<L.length && L.elem[i]!=cur_e)
+	while (i<L.length && L.elem[i] != cur_e)
 		++i;
 
-	if(i<L.length-1)					//×îºóÒ»¸ö½áµãÎŞºó¼Ì
+	if (i<L.length - 1)					//×îºóÒ»¸ö½áµãÎŞºó¼Ì
 	{
-		*next_e = L.elem[i+1];
+		*next_e = L.elem[i + 1];
 		return OK;
 	}
 
@@ -139,23 +128,23 @@ Status ListInsert_Sq(SqList *L, int i, LElemType_Sq e)//ÔÚË³Ğò±íLµÄµÚi¸öÎ»ÖÃÉÏ²å
 	LElemType_Sq *newbase;
 	LElemType_Sq *p, *q;
 
-	if(i<1 || i>(*L).length+1)
+	if (i<1 || i>(*L).length + 1)
 		return ERROR;					//iÖµ²»ºÏ·¨
 
-	if((*L).length >= (*L).listsize)	//Èô´æ´¢¿Õ¼äÒÑÂú£¬Ğè¿ª±ÙĞÂ¿Õ¼ä
+	if ((*L).length >= (*L).listsize)	//Èô´æ´¢¿Õ¼äÒÑÂú£¬Ğè¿ª±ÙĞÂ¿Õ¼ä
 	{
-		newbase = (LElemType_Sq*)realloc((*L).elem, ((*L).listsize+LISTINCREMENT)*sizeof(LElemType_Sq));
-		if(!newbase)
+		newbase = (LElemType_Sq*)realloc((*L).elem, ((*L).listsize + LISTINCREMENT) * sizeof(LElemType_Sq));
+		if (!newbase)
 			exit(OVERFLOW);
 
 		(*L).elem = newbase;
 		(*L).listsize += LISTINCREMENT;
 	}
 
-	q = &(*L).elem[i-1];				//qÎª²åÈëÎ»ÖÃ
+	q = &(*L).elem[i - 1];				//qÎª²åÈëÎ»ÖÃ
 
-	for(p=&(*L).elem[(*L).length-1]; p>=q; --p)
-		*(p+1) = *p;					//²åÈëÎ»ÖÃ¼°Ö®ºóµÄÔªËØÓÒÒÆ
+	for (p = &(*L).elem[(*L).length - 1]; p >= q; --p)
+		*(p + 1) = *p;					//²åÈëÎ»ÖÃ¼°Ö®ºóµÄÔªËØÓÒÒÆ
 
 	*q = e;								//²åÈëe
 	(*L).length++;						//±í³¤Ôö1
@@ -167,15 +156,15 @@ Status ListDelete_Sq(SqList *L, int i, LElemType_Sq *e)//É¾³ıË³Ğò±íLÉÏµÚi¸öÎ»ÖÃµ
 {
 	LElemType_Sq *p, *q;
 
-	if(i<1 || i>(*L).length)
+	if (i<1 || i>(*L).length)
 		return ERROR;					//iÖµ²»ºÏ·¨
 
-	p = &(*L).elem[i-1];				//pÎª±»É¾³ıÔªËØµÄÎ»ÖÃ
+	p = &(*L).elem[i - 1];				//pÎª±»É¾³ıÔªËØµÄÎ»ÖÃ
 	*e = *p;
-	q = (*L).elem+(*L).length-1; 		//±íÎ²ÔªËØÎ»ÖÃ
+	q = (*L).elem + (*L).length - 1; 		//±íÎ²ÔªËØÎ»ÖÃ
 
-	for(++p; p<=q; ++p)
-		*(p-1) = *p;					//±»É¾ÔªËØÖ®ºóµÄÔªËØ×óÒÆ
+	for (++p; p <= q; ++p)
+		*(p - 1) = *p;					//±»É¾ÔªËØÖ®ºóµÄÔªËØ×óÒÆ
 
 	(*L).length--;						//±í³¤¼õ1
 
@@ -187,7 +176,7 @@ Status ListTraverse_Sq(SqList L, void (Visit)(LElemType_Sq))//ÓÃvisitº¯Êı·ÃÎÊË³Ğ
 {
 	int i;
 
-	for(i=0; i<L.length; i++)
+	for (i = 0; i<L.length; i++)
 		Visit(L.elem[i]);
 
 	return OK;
