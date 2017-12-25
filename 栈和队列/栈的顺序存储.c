@@ -75,7 +75,7 @@ Status GetTop_Sq(SqStack S, SElemType_Sq *e)
 
 Status Push_Sq(SqStack *S, SElemType_Sq *e)
 {
-	//元素e出栈
+	//元素e进栈
 	if ((*S).top - (*S).base >= (*S).stacksize)
 	{
 		(*S).base = (SElemType_Sq*)realloc((*S).base, ((*S).stacksize + STACKINCREMENT) * sizeof(SElemType_Sq));
@@ -88,6 +88,17 @@ Status Push_Sq(SqStack *S, SElemType_Sq *e)
 	(S->top)++;
 	return OK;
 }
+
+Status Pop_Sq(SqStack *S, SElemType_Sq *e)
+{
+	//元素e出栈
+	if ((*S).top == (*S).base)
+		return ERROR;
+	(*S).top--;
+	*e = *((*S).top);
+	return OK;
+}
+
 Status StackTraverse_Sq(SqStack S, void(Visit)(SElemType_Sq))
 {
 	//访问栈
