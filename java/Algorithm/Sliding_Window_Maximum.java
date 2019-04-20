@@ -1,12 +1,6 @@
 package Algorithm;
 
-import sun.awt.image.ImageWatched;
-
 import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
  * 给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口 k 内的数字。滑动窗口每次只向右移动一位。
@@ -34,13 +28,13 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 public class Sliding_Window_Maximum {
 
     /**
-     * 方法一:维护优先队列
-     * 方法二:维护双向队列
+     * 方法一:维护小顶堆(优先队列) O(Nlogk)
+     * 方法二:维护双向队列 O(N)
      * */
 
     public int[] maxSlidingWindow(int[] nums, int k) {
         if(nums.length == 0) return new int[]{};
-        LinkedList<Integer> queue = new LinkedList<>();
+        LinkedList<Integer> queue = new LinkedList<Integer>();
         int[] outPut = new int[nums.length - k + 1];
         for (int i = 0; i < k-1; i++) add(queue,i,nums);
         for (int i = k-1; i < nums.length; i++) {
